@@ -1,53 +1,39 @@
 ```
-# Dependencies
+# JSON reports
+*.json
+
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Build artifacts
-dist/
-build/
-*.egg-info/
-
-# Virtual environments
-venv/
-.venv/
-env/
-.ENV/
-
 # Logs
 *.log
 
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Environment variables
+# Environment files
 .env
 .env.local
-*.env.*
+.env.*
 
-# Coverage reports
-.coverage
-coverage/
-htmlcov/
-
-# IDE specific
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 *.tmp
 
-# Protobuf
-*.pb.go
-*.pb.py
-*.pb.rb
-*.pb.ts
-*.pb.asm
-*.pb.java
-*.pb.js
-*.pb.hpp
-*.pb.cc
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
+
+# OS files
+.DS_Store
+Thumbs.db
 ```
