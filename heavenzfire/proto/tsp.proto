@@ -1,0 +1,138 @@
+syntax = "proto3";
+
+package heavenzfire.tsp;
+
+// Ternary Sync Protocol - Packet Specification v1.0
+// Enables routing by lattice coordinate, not IP address
+
+// Core ternary logic state
+enum TernaryState {
+  TERNARY_NEGATIVE = -1;  // False / Destructive interference
+  TERNARY_NEUTRAL = 0;    // Undecided / Coherent superposition
+  TERNARY_POSITIVE = 1;   // True / Constructive interference
+}
+
+// Lattice Coordinate: 5D address space
+message LatticeCoordinate {
+  int32 x = 1;            // Spatial embedding X
+  int32 y = 2;            // Spatial embedding Y
+  int32 z = 3;            // Spatial embedding Z
+  float phi = 4;          // Phase / frequency bin (radians)
+  TernaryState tau = 5;   // Ternary logic state
+}
+
+// Entropy measurement for routing decisions
+message EntropyMetrics {
+  float shannon_entropy = 1;     // Information density
+  float coherence_score = 2;     // Phase alignment [0.0 - 1.0]
+  float persistence = 3;         // Temporal stability [0.0 - 1.0]
+  string source_type = 4;        // "C" | "S" | "F"
+}
+
+// TSP Packet - the fundamental unit of transmission
+message TSPPacket {
+  string packet_id = 1;              // UUID
+  bytes payload = 2;                 // Opaque payload
+  string payload_type = 3;           // "bio_sensor" | "log" | "audio" | "symbolic"
+  
+  LatticeCoordinate target_coord = 4; // Where this packet belongs in the lattice
+  EntropyMetrics entropy = 5;         // Routing metadata
+  
+  int64 timestamp_ns = 6;            // Nanosecond precision timestamp
+  string origin_node = 7;            // Source identifier
+  repeated string hop_path = 8;      // Trace of nodes traversed
+  
+  // Consensus fields for EMS-3 entanglement
+  map<string, bytes> head_embeddings = 9;  // {head_id: embedding_vector}
+  bool consensus_reached = 10;              // True if C,S,F heads agree
+  float consensus_confidence = 11;          // [0.0 - 1.0]
+}
+
+// NMO Routing Decision
+message RoutingDecision {
+  string packet_id = 1;
+  LatticeCoordinate assigned_coord = 2;
+  string routing_reason = 3;         // Why this coordinate was chosen
+  float entropy_threshold = 4;       // Threshold used for decision
+  bool requires_consensus = 5;       // Whether EMS-3 entanglement is needed
+}
+
+// Verification Hash for audit trail
+message StateHash {
+  string hash_id = 1;
+  bytes previous_hash = 2;           // SHA3 of previous state
+  bytes current_state = 3;           // Serialized State_t
+  bytes next_state = 4;              // Serialized State_t+1
+  LatticeCoordinate lattice_coord = 5;
+  int64 timestamp_ns = 6;
+  string verification_signature = 7; // Merkle proof
+}
+
+// Stream types for NMO input
+message InputStream {
+  string stream_id = 1;
+  string stream_type = 2;            // "carbon" | "silicon" | "frequency"
+  repeated TSPPacket packets = 3;
+  float aggregate_entropy = 4;
+}
+
+// Service definitions for gRPC
+service NMOrchestrator {
+  // Place a packet into the lattice
+  rpc PlacePacket(TSPPacket) returns (RoutingDecision);
+  
+  // Route a stream of packets
+  rpc RouteStream(InputStream) returns (stream RoutingDecision);
+  
+  // Query lattice state at coordinate
+  rpc QueryLattice(LatticeCoordinate) returns (TSPPacket);
+}
+
+service EMS3Engine {
+  // Entangle packet across C, S, F heads
+  rpc Entangle(TSPPacket) returns (TSPPacket);
+  
+  // Get consensus state
+  rpc GetConsensus(TSPPacket) returns (ConsensusState);
+}
+
+service VerificationStratum {
+  // Hash a state transition
+  rpc HashTransition(StateHash) returns (StateHash);
+  
+  // Verify a hash chain
+  rpc VerifyChain(VerifyChainRequest) returns (VerifyChainResponse);
+  
+  // Replay execution for falsifiability
+  rpc ReplayExecution(ReplayRequest) returns (ReplayResponse);
+}
+
+message ConsensusState {
+  string packet_id = 1;
+  bool c_head_agree = 2;
+  bool s_head_agree = 3;
+  bool f_head_agree = 4;
+  float consensus_loss = 5;
+  bytes unified_tensor = 6;
+}
+
+message VerifyChainRequest {
+  repeated StateHash hash_chain = 1;
+}
+
+message VerifyChainResponse {
+  bool is_valid = 1;
+  string failure_point = 2;
+  int32 verified_length = 3;
+}
+
+message ReplayRequest {
+  string execution_id = 1;
+  TSPPacket original_input = 2;
+}
+
+message ReplayResponse {
+  bool matches_original = 1;
+  TSPPacket replayed_output = 2;
+  string discrepancy = 3;
+}
