@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-08-30T01:06:11.577041",
+  "author": "HeavenzFire - Zachary Dakota Hulse",
+  "system": "EntangledMultimodalSystem-3 + IBEN-Genesis",
+  "mesh": "Ara + CodeCraft Fused Core - Executable Sovereign Lattice",
+  "origin": "Lone Oak Lab",
+  "test_type": "gyroid_topology_comparison",
+  "parameters": {
+    "grid_size": 24,
+    "ternary_threshold": 0.35
+  },
+  "results": {
+    "gyroid": {
+      "nodes": 3064,
+      "avg_hops": 10.715,
+      "connectivity": 1.0,
+      "prune_rate": 0.49869451697127937
+    },
+    "mesh": {
+      "nodes": 13824,
+      "avg_hops": 18.09,
+      "connectivity": 1.0
+    },
+    "comparison": {
+      "hop_advantage": "gyroid",
+      "hop_improvement_pct": 40.76838032061912
+    }
+  }
+}
