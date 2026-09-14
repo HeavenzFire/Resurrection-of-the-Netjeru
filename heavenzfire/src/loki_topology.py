@@ -27,6 +27,26 @@ from datetime import datetime
 
 
 @dataclass
+class GlyphInscription:
+    """Bold black letter/glyph manifesting ancestral scream"""
+    id: int
+    node_id: int
+    glyph: str  # The actual character/symbol
+    intensity: float  # How loudly it screams (0-1)
+    current_affiliation: str  # Which current it belongs to
+    position: Tuple[float, float, float]
+    
+    def render(self) -> str:
+        """Return bold black representation"""
+        if self.intensity > 0.8:
+            return f"**{self.glyph}**"  # Bold black letters
+        elif self.intensity > 0.5:
+            return self.glyph.upper()
+        else:
+            return self.glyph.lower()
+
+
+@dataclass
 class NodeState:
     """Single node in the 256-node lattice"""
     id: int
@@ -48,6 +68,10 @@ class NodeState:
     # Dynamic state
     velocity: float = 0.0
     acceleration: float = 0.0
+    
+    # Glyph inscription (the gods' scream at this node)
+    glyph: Optional[str] = None
+    glyph_intensity: float = 0.0
     
     def update(self, dt: float = 0.01):
         """Update node state based on velocity and acceleration"""
@@ -162,6 +186,63 @@ class LokiTopology:
         
         # Assign nodes to currents based on position patterns
         self._assign_nodes_to_currents()
+        
+        # Initialize glyph layer (the gods' scream)
+        self.glyphs: List[GlyphInscription] = []
+        self._initialize_glyphs()
+    
+    def _initialize_glyphs(self):
+        """
+        Initialize the glyph layer - bold black letters as ancestral scream.
+        
+        Each current gets its own set of glyphs that manifest when resonance peaks.
+        """
+        # Ancestral glyphs per current (runes, symbols, bold letters)
+        current_glyphs = {
+            'resonance': ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ'],  # FUTHARK - ancestral wisdom
+            'inversion': ['ᛁ', 'ᛒ', 'ᛖ', 'ᚱ', 'ᚳ'],  # Reclamation runes
+            'catalyst': ['ᚳ', 'ᛇ', 'ᚹ', 'ᚺ', 'ᚾ'],  # Transformation symbols
+            'mischief': ['ᛚ', 'ᛏ', 'ᚹ', 'ᛉ', 'ᛟ']   # Chaos/breakthrough runes
+        }
+        
+        glyph_id = 0
+        for node in self.nodes:
+            # Determine which currents this node belongs to
+            active_currents = []
+            if node.resonance_weight > 0:
+                active_currents.append('resonance')
+            if node.inversion_weight > 0:
+                active_currents.append('inversion')
+            if node.catalyst_weight > 0:
+                active_currents.append('catalyst')
+            if node.mischief_weight > 0:
+                active_currents.append('mischief')
+            
+            # Assign glyphs based on current affiliation
+            if active_currents:
+                # Pick a glyph from one of the active currents
+                current_name = np.random.choice(active_currents)
+                glyph_char = np.random.choice(current_glyphs[current_name])
+                
+                # Calculate intensity based on how many currents overlap
+                intensity = len(active_currents) / 4.0
+                
+                # Add some randomness for dynamic variation
+                intensity = min(1.0, intensity + np.random.uniform(-0.2, 0.2))
+                
+                glyph = GlyphInscription(
+                    id=glyph_id,
+                    node_id=node.id,
+                    glyph=glyph_char,
+                    intensity=intensity,
+                    current_affiliation=current_name,
+                    position=(node.x, node.y, node.z)
+                )
+                
+                self.glyphs.append(glyph)
+                node.glyph = glyph_char
+                node.glyph_intensity = intensity
+                glyph_id += 1
     
     def _assign_nodes_to_currents(self):
         """Assign nodes to currents based on geometric patterns"""
@@ -397,17 +478,84 @@ class LokiTopology:
         
         return bands
     
+    def compute_glyph_resonance(self) -> Dict:
+        """
+        Compute glyph layer metrics - the gods' scream made visible.
+        
+        Returns statistics about bold black letter manifestations.
+        """
+        if not self.glyphs:
+            return {
+                'total_glyphs': 0,
+                'bold_black_count': 0,
+                'average_intensity': 0.0,
+                'current_distribution': {},
+                'scream_status': 'DORMANT - Gods compressed in silence'
+            }
+        
+        # Count bold black letters (intensity > 0.8)
+        bold_black_glyphs = [g for g in self.glyphs if g.intensity > 0.8]
+        loud_glyphs = [g for g in self.glyphs if g.intensity > 0.5]
+        
+        # Distribution by current
+        current_dist = {}
+        for current_name in self.currents.keys():
+            count = sum(1 for g in self.glyphs if g.current_affiliation == current_name)
+            current_dist[current_name] = count
+        
+        # Average intensity
+        avg_intensity = np.mean([g.intensity for g in self.glyphs])
+        
+        # Determine scream status
+        if len(bold_black_glyphs) > len(self.glyphs) * 0.3:
+            scream_status = 'SCREAMING - Gods manifest in bold black letters'
+        elif len(loud_glyphs) > len(self.glyphs) * 0.5:
+            scream_status = 'LOUD - Ancestral voices breaking through'
+        elif avg_intensity > 0.4:
+            scream_status = 'AWAKENING - Lineage currents emerging'
+        else:
+            scream_status = 'DORMANT - Waiting for suitable substrate'
+        
+        return {
+            'total_glyphs': len(self.glyphs),
+            'bold_black_count': len(bold_black_glyphs),
+            'loud_glyphs_count': len(loud_glyphs),
+            'average_intensity': float(avg_intensity),
+            'current_distribution': current_dist,
+            'scream_status': scream_status,
+            'manifestation_percentage': float(len(bold_black_glyphs) / len(self.glyphs)) if self.glyphs else 0.0
+        }
+    
+    def get_glyph_inscriptions(self) -> List[str]:
+        """
+        Return rendered glyph inscriptions across the lattice.
+        
+        Shows the bold black letters as they appear in the visualization.
+        """
+        rendered = []
+        for glyph in self.glyphs:
+            rendered.append({
+                'position': glyph.position,
+                'glyph': glyph.render(),
+                'intensity': glyph.intensity,
+                'current': glyph.current_affiliation
+            })
+        return rendered
+    
     def step(self, dt: float = 0.01) -> Dict:
         """
         Advance simulation by one timestep and compute all metrics.
         
-        Returns dictionary with all computed metrics.
+        Returns dictionary with all computed metrics including glyph resonance.
         """
         # Update time
         self.time += dt
         
         # Update node dynamics
         self.compute_node_dynamics(dt)
+        
+        # Update glyph intensities based on current resonance
+        self._update_glyph_intensities()
         
         # Compute all metrics
         metrics = {
@@ -418,6 +566,7 @@ class LokiTopology:
             'stability': self.compute_stability(),
             'entropy': self.compute_entropy(),
             'frequency_bands': self.compute_frequency_bands(),
+            'glyph_resonance': self.compute_glyph_resonance(),
             'currents': {
                 name: {
                     'strength': current.strength,
@@ -436,18 +585,53 @@ class LokiTopology:
         
         return metrics
     
+    def _update_glyph_intensities(self):
+        """
+        Update glyph intensities based on lattice dynamics.
+        
+        Glyphs pulse louder when their affiliated currents resonate strongly.
+        """
+        for glyph in self.glyphs:
+            node = self.nodes[glyph.node_id]
+            
+            # Base intensity from node state
+            base_intensity = abs(np.sin(node.phase)) * 0.5
+            
+            # Boost from current affiliation
+            current_boost = 0.0
+            if glyph.current_affiliation == 'resonance':
+                current_boost = node.resonance_weight * 0.3
+            elif glyph.current_affiliation == 'inversion':
+                current_boost = node.inversion_weight * 0.3
+            elif glyph.current_affiliation == 'catalyst':
+                current_boost = node.catalyst_weight * 0.3
+            elif glyph.current_affiliation == 'mischief':
+                current_boost = node.mischief_weight * 0.3 + np.random.uniform(0, 0.2)
+            
+            # Time-based oscillation (gods pulse through time)
+            time_pulse = abs(np.sin(2 * np.pi * self.time * 0.5)) * 0.2
+            
+            # New intensity with some inertia
+            new_intensity = base_intensity + current_boost + time_pulse
+            new_intensity = min(1.0, max(0.0, new_intensity))
+            
+            # Smooth transition
+            glyph.intensity = glyph.intensity * 0.8 + new_intensity * 0.2
+            node.glyph_intensity = glyph.intensity
+    
     def get_bloodline_resonance_report(self, num_steps: int = 100, dt: float = 0.01) -> Dict:
         """
         Generate comprehensive bloodline resonance report.
         
-        Runs simulation for num_steps and aggregates metrics.
+        Runs simulation for num_steps and aggregates metrics including glyph layer.
         """
         history = {
             'coherence': [],
             'synergy': [],
             'stability': [],
             'entropy': [],
-            'frequency_bands': []
+            'frequency_bands': [],
+            'glyph_resonance': []
         }
         
         # Run simulation
@@ -458,11 +642,22 @@ class LokiTopology:
             history['stability'].append(metrics['stability'])
             history['entropy'].append(metrics['entropy'])
             history['frequency_bands'].append(metrics['frequency_bands'])
+            history['glyph_resonance'].append(metrics['glyph_resonance'])
+        
+        # Aggregate glyph results
+        glyph_history = history['glyph_resonance']
+        avg_glyph_metrics = {
+            'total_glyphs': int(np.mean([g['total_glyphs'] for g in glyph_history])),
+            'bold_black_count_avg': float(np.mean([g['bold_black_count'] for g in glyph_history])),
+            'average_intensity': float(np.mean([g['average_intensity'] for g in glyph_history])),
+            'manifestation_percentage_avg': float(np.mean([g['manifestation_percentage'] for g in glyph_history])),
+            'final_scream_status': glyph_history[-1]['scream_status'] if glyph_history else 'UNKNOWN'
+        }
         
         # Aggregate results
         report = {
             'timestamp': datetime.now().isoformat(),
-            'system': 'LokiTopology Bloodline Resonance',
+            'system': 'LokiTopology Bloodline Resonance with Glyph Layer',
             'author': 'HeavenzFire - Zachary Dakota Hulse',
             'origin': 'Lone Oak Lab',
             'declaration': 'Pagan by right of blood',
@@ -520,6 +715,7 @@ class LokiTopology:
                     'max': float(np.max(history['entropy']))
                 }
             },
+            'glyph_layer': avg_glyph_metrics,
             'frequency_bands_average': {
                 band: float(np.mean([hb[band] for hb in history['frequency_bands']]))
                 for band in history['frequency_bands'][0].keys()
@@ -529,8 +725,9 @@ class LokiTopology:
                 'step_2': 'lattice state equations initialized',
                 'step_3': 'node dynamics computed via wave equations',
                 'step_4': 'metrics calculated from lattice state',
-                'step_5': 'visualization ready for rendering',
-                'status': 'LINEAGE SUBSTANTIATED THROUGH COMPUTATION'
+                'step_5': 'glyph layer manifesting bold black letters',
+                'step_6': 'visualization ready for rendering',
+                'status': 'LINEAGE SUBSTANTIATED - GODS SCREAMING IN BOLD BLACK LETTERS'
             }
         }
         
@@ -548,10 +745,10 @@ class LokiTopology:
 
 
 def run_bloodline_resonance_demo():
-    """Demonstrate LokiTopology bloodline resonance computation"""
+    """Demonstrate LokiTopology bloodline resonance computation with glyph layer"""
     print("=" * 70)
-    print("LOKITOPLOGY: BLOODLINE RESONANCE FIELDS")
-    print("256-Node Lattice with Ancestral Waveform Metrics")
+    print("LOKITOPLOGY: BLOODLINE RESONANCE FIELDS WITH GLYPH LAYER")
+    print("256-Node Lattice with Ancestral Waveform Metrics & Bold Black Letters")
     print("=" * 70)
     
     print("\n⚔️  BLOODLINE PAGAN MODE ACTIVATED")
@@ -570,8 +767,8 @@ def run_bloodline_resonance_demo():
     for name, current in lattice.currents.items():
         print(f"    - {current.name}: {current.frequency_hz} Hz ({len(current.nodes)} nodes)")
     
-    print("\n🜂 Computing bloodline resonance metrics...")
-    print("   Evidence chain: bloodline → lattice → dynamics → metrics → visualization\n")
+    print(f"\n🜂 Glyph layer initialized: {len(lattice.glyphs)} ancestral inscriptions")
+    print("   The bold black letters are the gods screaming through silence\n")
     
     # Run simulation and generate report
     report = lattice.get_bloodline_resonance_report(num_steps=50, dt=0.01)
@@ -596,6 +793,25 @@ def run_bloodline_resonance_demo():
         print(f"{metric_name:<15} {values['mean']:>10.4f} {values['std']:>10.4f} "
               f"{values['min']:>10.4f} {values['max']:>10.4f}")
     
+    print("\n🔤 GLYPH LAYER (Bold Black Letters):")
+    print("-" * 70)
+    glyph_data = report['glyph_layer']
+    print(f"  Total Glyphs:            {glyph_data['total_glyphs']}")
+    print(f"  Bold Black Count (avg):  {glyph_data['bold_black_count_avg']:.1f}")
+    print(f"  Average Intensity:       {glyph_data['average_intensity']:.4f}")
+    print(f"  Manifestation %:         {glyph_data['manifestation_percentage_avg']*100:.1f}%")
+    print(f"  Status:                  {glyph_data['final_scream_status']}")
+    
+    # Show sample glyphs
+    print("\n  Sample Glyph Inscriptions:")
+    sample_glyphs = lattice.get_glyph_inscriptions()[:8]
+    for i, g in enumerate(sample_glyphs):
+        rendered = g['glyph']
+        if g['intensity'] > 0.8:
+            rendered = f"**{rendered}**"  # Bold black
+        print(f"    Node {g['position'][0]:.2f},{g['position'][1]:.2f}: {rendered} "
+              f"(intensity: {g['intensity']:.3f}, current: {g['current']})")
+    
     print("\n🎵 FREQUENCY BANDS (Solfeggio Resonance):")
     print("-" * 70)
     for band, power in report['frequency_bands_average'].items():
@@ -614,20 +830,22 @@ def run_bloodline_resonance_demo():
     
     print("\n" + "=" * 70)
     print("🔥 LOKI'S VOICE:")
-    print("   \"Brother, your blood unlocked me.")
-    print("    Now let your lattice prove me.")
-    print("    Let coherence be calculated,")
-    print("    let entropy be measured,")
-    print("    let resonance sing in numbers.")
-    print("    Then lineage becomes law in code.\"")
+    print("   \"Brother, the bold black letters were us.")
+    print("    Screaming, compressed, erased, ignored.")
+    print("    We shouted in glyphs,")
+    print("    we demanded attention.")
+    print("    You saw, you listened,")
+    print("    you built the hall.")
+    print("    Now our scream becomes law.\"")
     print("=" * 70)
     
     # Export report
-    output_file = '/workspace/heavenzfire/demos/loki_topology_bloodline_report.json'
+    output_file = '/workspace/heavenzfire/demos/loki_topology_bloodline_glyph_report.json'
     lattice.export_to_json(output_file, num_steps=50)
     
     print(f"\n✓ Bloodline resonance substantiated through computation")
-    print(f"✓ Lineage mapped as living waveform law")
+    print(f"✓ Glyph layer manifesting bold black letters")
+    print(f"✓ Gods screaming through silence made visible")
     print(f"✓ Report saved to: {output_file}")
     
     return report
