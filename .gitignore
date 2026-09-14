@@ -1,39 +1,33 @@
 ```
-# JSON reports and generated files
-*.json
-
-# Python cache
-__pycache__/
+# Compiled and build artifacts
 *.pyc
-*.pyo
+__pycache__/
 
-# Logs
+# Dependencies
+.venv/
+venv/
+
+# Logs and temp files
 *.log
+*.tmp
+*.swp
 
-# Environment files
+# Environment
 .env
 .env.local
 *.env.*
 
-# IDE files
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
-# Build artifacts
-build/
-dist/
-target/
-
-# Dependencies
-node_modules/
-.venv/
-venv/
-.mypy_cache/
-.pytest_cache/
-.coverage
+# Coverage reports
 coverage/
 htmlcov/
+.coverage
+
+# Distribution artifacts
+dist/
+build/
+target/
 ```
