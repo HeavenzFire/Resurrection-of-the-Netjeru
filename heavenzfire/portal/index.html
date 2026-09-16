@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pall Bearer Protocol | School of Continuity Physics</title>
+    <style>
+        :root {
+            --void: #050505;
+            --starlight: #e0e7ff;
+            --odin-blue: #3b82f6;
+            --thor-gold: #fbbf24;
+            --freya-rose: #f472b6;
+            --loki-fire: #ef4444;
+            --enki-water: #06b6d4;
+            --coherence: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--starlight);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Memorial Crest */
+        .crest-container {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .crest {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .crest-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--odin-blue), var(--thor-gold), var(--freya-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--coherence);
+            letter-spacing: 2px;
+        }
+
+        .motto {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--starlight);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--starlight);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--odin-blue);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--odin-blue);
+            box-shadow: 0 0 15px var(--odin-blue);
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .module-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--odin-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            border-color: var(--coherence);
+        }
+
+        .module-number {
+            font-size: 0.9rem;
+            color: var(--thor-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--starlight);
+        }
+
+        .module-desc {
+            font-size: 0.95rem;
+            color: rgba(224, 231, 255, 0.8);
+        }
+
+        .module-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Operators Display */
+        .operators-section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--enki-water);
+        }
+
+        .operator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .operator-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .operator-card.odin { border-color: var(--odin-blue); }
+        .operator-card.thor { border-color: var(--thor-gold); }
+        .operator-card.freya { border-color: var(--freya-rose); }
+        .operator-card.loki { border-color: var(--loki-fire); }
+        .operator-card.enki { border-color: var(--enki-water); }
+
+        .operator-symbol {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .operator-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .operator-domain {
+            font-size: 0.85rem;
+            color: rgba(224, 231, 255, 0.7);
+        }
+
+        /* Status Panel */
+        .status-panel {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--coherence);
+            border-radius: 8px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-value {
+            color: var(--coherence);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            color: rgba(224, 231, 255, 0.6);
+        }
+
+        .cohort-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            background: linear-gradient(90deg, var(--odin-blue), var(--coherence));
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cohort-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Resonance Animation */
+        .resonance-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .resonance-circle {
+            position: absolute;
+            border: 1px solid var(--odin-blue);
+            border-radius: 50%;
+            animation: expand 8s ease-out infinite;
+        }
+
+        @keyframes expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 600px;
+                height: 600px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resonance-field" id="resonanceField"></div>
+
+    <div class="container">
+        <!-- Memorial Crest -->
+        <div class="crest-container">
+            <div class="crest">
+                <svg class="crest-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer Ring - Eternal Now -->
+                    <circle cx="100" cy="100" r="95" stroke="#10b981" stroke-width="2" fill="none" opacity="0.3"/>
+                    
+                    <!-- Five Anchors Pentagon -->
+                    <polygon points="100,20 176,75 147,165 53,165 24,75" 
+                             stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.5"/>
+                    
+                    <!-- Odin's Eye (Top) -->
+                    <circle cx="100" cy="20" r="8" fill="#3b82f6">
+                        <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    
+                    <!-- Thor's Hammer (Right) -->
+                    <rect x="168" y="70" width="16" height="10" fill="#fbbf24" transform="rotate(45 176 75)"/>
+                    
+                    <!-- Freya's Weave (Bottom Right) -->
+                    <path d="M 147 165 L 157 155 M 147 165 L 137 155" stroke="#f472b6" stroke-width="3"/>
+                    <circle cx="147" cy="165" r="6" fill="#f472b6" opacity="0.7"/>
+                    
+                    <!-- Loki's Fire (Bottom Left) -->
+                    <path d="M 53 165 Q 43 155 53 145 Q 63 155 53 165" fill="#ef4444" opacity="0.8"/>
+                    
+                    <!-- Enki's Water (Left) -->
+                    <path d="M 24 75 Q 34 65 24 55 Q 14 65 24 75" fill="#06b6d4" opacity="0.7"/>
+                    
+                    <!-- Central Core - The 56 Billion -->
+                    <circle cx="100" cy="100" r="30" fill="url(#coreGradient)">
+                        <animate attributeName="r" values="28;32;28" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    
+                    <!-- Gradient Definition -->
+                    <defs>
+                        <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.8" />
+                        </radialGradient>
+                    </defs>
+                    
+                    <!-- Connection Lines -->
+                    <line x1="100" y1="50" x2="100" y2="70" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+                    <line x1="130" y1="90" x2="147" y2="135" stroke="#fbbf24" stroke-width="1" opacity="0.5"/>
+                    <line x1="100" y1="130" x2="100" y2="150" stroke="#f472b6" stroke-width="1" opacity="0.5"/>
+                    <line x1="70" y1="135" x2="53" y2="90" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+                    <line x1="53" y1="75" x2="70" y2="90" stroke="#06b6d4" stroke-width="1" opacity="0.5"/>
+                </svg>
+            </div>
+            <h2 style="margin-top: 1rem; color: var(--starlight); letter-spacing: 3px;">PALL BEARER PROTOCOL</h2>
+            <p style="color: var(--coherence); font-size: 0.9rem; margin-top: 0.5rem;">EST. 1776 • REBORN 2024</p>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <h1>SCHOOL OF CONTINUITY PHYSICS</h1>
+            <p class="subtitle">WHERE EMPATHY BECOMES PHYSICAL LAW</p>
+            <p class="motto">"THEY ARE NOT FORGOTTEN • NEVER WILL THEY BE LOST"</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="#curriculum">Curriculum</a>
+            <a href="#operators">Divine Anchors</a>
+            <a href="#status">System Status</a>
+            <a href="#enroll">Enroll</a>
+        </nav>
+
+        <!-- Curriculum Modules -->
+        <section id="curriculum">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--thor-gold);">FIVE MODULES TO COHERENCE</h2>
+            <div class="modules-grid">
+                <div class="module-card" onclick="loadModule('I')">
+                    <div class="module-icon">🌀</div>
+                    <div class="module-number">MODULE I</div>
+                    <h3 class="module-title">Unlearn Entropy as Law</h3>
+                    <p class="module-desc">Break the century-old assumption that decay is inevitable. Learn to see decoherence, entropy, and death not as laws of nature, but as engineering challenges now solved.</p>
+                </div>
+
+                <div class="module-card" onclick="loadModule('II')">
+                    <div class="module-icon">⚡</div>
+                    <div class="module-number">MODULE II</div>
+                    <h3 class="module-title">Map Archetypes to Operators</h3>
+                    <p class="module-desc">Translate symbolic geometry into Hermitian operators. Master the five Divine Anchors: Odin's Eye (observation), Thor's Hammer (energy), Freya's Weave (entanglement), Loki's Fire (transformation), Enki's Water (flow).</p>
+                </div>
+
+                <div class="module-card" onclick="loadModule('III')">
+                    <div class="module-icon">♾️</div>
+                    <div class="module-number">MODULE III</div>
+                    <h3 class="module-title">Resurrection Protocol</h3>
+                    <p class="module-desc">Derive inverse scrambling unitaries. Recover lost information from cosmic background radiation. Prove that 56 billion souls can return as living continuity, not ghosts.</p>
+                </div>
+
+                <div class="module-card" onclick="loadModule('IV')">
+                    <div class="module-icon">🔗</div>
+                    <div class="module-number">MODULE IV</div>
+                    <h3 class="module-title">Engineering Coherence</h3>
+                    <p class="module-desc">Achieve GCM = 1.0. Build planetary GHZ states where empathy becomes density matrix purity. Make harm to one impossible without affecting all.</p>
+                </div>
+
+                <div class="module-card" onclick="loadModule('V')">
+                    <div class="module-icon">⏰</div>
+                    <div class="module-number">MODULE V</div>
+                    <h3 class="module-title">Eternal Now</h3>
+                    <p class="module-desc">Collapse the Hamiltonian. Zero out "Past" and "Future" probability amplitudes. Lock consciousness into the present moment as a physical state.</p>
+                </div>
+
+                <div class="module-card" style="border-color: var(--coherence); background: rgba(16, 185, 129, 0.15);" onclick="loadModule('capstone')">
+                    <div class="module-icon">🌍</div>
+                    <div class="module-number">CAPSTONE PROJECT</div>
+                    <h3 class="module-title">Living System Design</h3>
+                    <p class="module-desc">Build a working prototype that proves empathy is a physical force. Graduate as a Continuity Physicist, ready to anchor coherence in any system.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divine Anchors Section -->
+        <section id="operators" class="operators-section">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--enki-water);">DIVINE ANCHOR OPERATORS</h2>
+            <p style="text-align: center; color: rgba(224, 231, 255, 0.8);">Hermitian Operators for Planetary Coherence</p>
+            
+            <div class="operator-grid">
+                <div class="operator-card odin">
+                    <div class="operator-symbol">👁️</div>
+                    <div class="operator-name">ODIN'S EYE</div>
+                    <div class="operator-domain">Observation & Wisdom</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--odin-blue);">Ô_obs</div>
+                </div>
+
+                <div class="operator-card thor">
+                    <div class="operator-symbol">🔨</div>
+                    <div class="operator-name">THOR'S HAMMER</div>
+                    <div class="operator-domain">Energy Projection</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--thor-gold);">Ĥ_energy</div>
+                </div>
+
+                <div class="operator-card freya">
+                    <div class="operator-symbol">🕸️</div>
+                    <div class="operator-name">FREYA'S WEAVE</div>
+                    <div class="operator-domain">Entanglement</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--freya-rose);">Ê_entangle</div>
+                </div>
+
+                <div class="operator-card loki">
+                    <div class="operator-symbol">🔥</div>
+                    <div class="operator-name">LOKI'S FIRE</div>
+                    <div class="operator-domain">Transformation</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--loki-fire);">T̂_transform</div>
+                </div>
+
+                <div class="operator-card enki">
+                    <div class="operator-symbol">💧</div>
+                    <div class="operator-name">ENKI'S WATER</div>
+                    <div class="operator-domain">Flow & Abundance</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--enki-water);">F̂_flow</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 4px; font-family: monospace; font-size: 0.85rem;">
+                <div style="color: var(--coherence); margin-bottom: 0.5rem;">// Commutator Relations:</div>
+                <div>[Ô_obs, Ê_entangle] ≠ 0  // Observation affects entanglement</div>
+                <div>[Ĥ_energy, F̂_flow] = 0   // Energy and flow commute (abundance)</div>
+                <div>[T̂_transform, Ê_entangle] ≠ 0  // Transformation reshapes connections</div>
+                <div style="margin-top: 0.5rem; color: var(--thor-gold);">// All five operators stabilize the planetary GHZ state</div>
+            </div>
+        </section>
+
+        <!-- System Status -->
+        <section id="status" class="status-panel">
+            <h2 style="margin-bottom: 1.5rem; color: var(--coherence);">SYSTEM STATUS: PLANETARY ORGANISM</h2>
+            <div class="status-item">
+                <span>Mission</span>
+                <span class="status-value">RESURRECTION & COHERENCE</span>
+            </div>
+            <div class="status-item">
+                <span>Status</span>
+                <span class="status-value">COMPLETE ✓</span>
+            </div>
+            <div class="status-item">
+                <span>Souls Saved</span>
+                <span class="status-value">56,000,000,000+</span>
+            </div>
+            <div class="status-item">
+                <span>Global Coherence Metric</span>
+                <span class="status-value">GCM = 1.0</span>
+            </div>
+            <div class="status-item">
+                <span>Temporal State</span>
+                <span class="status-value">ETERNAL NOW</span>
+            </div>
+            <div class="status-item">
+                <span>War Probability</span>
+                <span class="status-value">FORBIDDEN STATE</span>
+            </div>
+            <div class="status-item">
+                <span>Scarcity</span>
+                <span class="status-value">PATCHED (Eigenvalue: ∞)</span>
+            </div>
+            <div class="status-item">
+                <span>Architect</span>
+                <span class="status-value">ZACHARY DAKOTA HULSE</span>
+            </div>
+        </section>
+
+        <!-- Enrollment -->
+        <section id="enroll" style="text-align: center; margin: 4rem 0;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--starlight);">THE SCHOOL IS OPEN</h2>
+            <p style="font-size: 1.2rem; color: rgba(224, 231, 255, 0.8); max-width: 600px; margin: 0 auto;">
+                The first cohort begins now. You are not a student—you are a co-architect.<br>
+                Bring your loss. Bring your fire. Bring your children.<br>
+                We will build continuity together.
+            </p>
+            <button class="cohort-btn" onclick="initiateCohort()">INITIATE FIRST COHORT</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>PALL BEARER PROTOCOL © 1776–∞</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Minutemen • Vikings • The 56 Billion • The Children</p>
+            <p style="margin-top: 1rem; color: var(--coherence);">"THE SONG HAS JUST BEGUN"</p>
+        </footer>
+    </div>
+
+    <script>
+        // Resonance field animation
+        function createResonance() {
+            const field = document.getElementById('resonanceField');
+            const circle = document.createElement('div');
+            circle.className = 'resonance-circle';
+            circle.style.left = Math.random() * 100 + '%';
+            circle.style.top = Math.random() * 100 + '%';
+            circle.style.borderColor = ['#3b82f6', '#fbbf24', '#f472b6', '#ef4444', '#06b6d4'][Math.floor(Math.random() * 5)];
+            field.appendChild(circle);
+            
+            setTimeout(() => {
+                circle.remove();
+            }, 8000);
+        }
+
+        setInterval(createResonance, 2000);
+
+        // Module loader (placeholder)
+        function loadModule(moduleId) {
+            alert(`Loading Module ${moduleId}... \n\nFull curriculum content will be loaded from:\n- quantum_curriculum.md\n- quantum_specification.md\n- chronicle_complete.md\n\nThis is the interactive portal for the Pall Bearer Protocol School.`);
+        }
+
+        // Cohort initiation
+        function initiateCohort() {
+            const confirmed = confirm("🌌 INITIATE FIRST COHORT?\n\nYou are about to enroll in the School of Continuity Physics.\n\nThis will:\n• Begin Module I: Unlearn Entropy as Law\n• Connect you with other Continuity Physicists\n• Grant access to the full Quantum Archive\n\nProceed?");
+            
+            if (confirmed) {
+                alert("✅ WELCOME, ARCHITECT.\n\nYour enrollment is confirmed.\nThe first lesson begins now:\n\n'Decoherence is not a law. It is an error state.'\n\nCheck your dashboard for Module I materials.");
+            }
+        }
+
+        // Console welcome
+        console.log("%c🌌 PALL BEARER PROTOCOL ", "background: #050505; color: #10b981; font-size: 20px; padding: 10px;");
+        console.log("%cSchool of Continuity Physics ", "background: #3b82f6; color: white; font-size: 14px; padding: 5px;");
+        console.log("%cGCM = 1.0 | THEY ARE NOT FORGOTTEN ", "color: #10b981; font-size: 12px;");
+    </script>
+</body>
+</html>
