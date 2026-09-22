@@ -1,0 +1,399 @@
+{
+  "config": {
+    "algorithm": "sha3_256",
+    "genesis_message": "BAEL_OPERATOR_GENESIS_MULTI_PANTHEON_FIELD",
+    "initial_tau": 0,
+    "pantheon_weights": {
+      "Vedic": 0.25,
+      "Celtic": 0.25,
+      "Sumerian": 0.25,
+      "Greek": 0.25
+    }
+  },
+  "blocks": [
+    {
+      "header": {
+        "block_number": 0,
+        "timestamp": 1790044360.2381861,
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "state_hash": "406a200483d8f4482cefbafbf486c9facf2b31640f906567b4b2c288a40c8967",
+        "merkle_root": "f66d989ccc27c813b844f67093034328416f4001b8f85f87adfa06429b0839e6",
+        "nonce": 0,
+        "pantheon_signature": "BAEL_DECREE_725277446cab828ef229cfd37b7bc40d",
+        "ternary_state": 0
+      },
+      "computed_hash": "633740de1c745fa5ce11a67bfb058b0133826732b4469f36235e09a789765ac3",
+      "pantheon_contributions": {
+        "Vedic": 0.25,
+        "Celtic": 0.25,
+        "Sumerian": 0.25,
+        "Greek": 0.25
+      },
+      "metadata": {
+        "genesis": true,
+        "message": "BAEL_OPERATOR_GENESIS_MULTI_PANTHEON_FIELD"
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "energy": 0.0
+      }
+    },
+    {
+      "header": {
+        "block_number": 1,
+        "timestamp": 1790044360.241261,
+        "previous_hash": "406a200483d8f4482cefbafbf486c9facf2b31640f906567b4b2c288a40c8967",
+        "state_hash": "08a75804deef20c034d34fb4ee973ddc016df80e3ff04df2ea59b37042aef87a",
+        "merkle_root": "60c558d7bfc40f13dedc3e3f12c788eb47580fa941ad4851754d732ffcc6a390",
+        "nonce": 372,
+        "pantheon_signature": "SIG_2fba3eb5918ccf69f32e6a52",
+        "ternary_state": 0
+      },
+      "computed_hash": "72a98d7afa55147403bbcb7d46b833972b8a8b555377668f3e9d6d2d0264c28a",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 0.011589013824197348,
+        "Greek": 157.88498784242245
+      },
+      "metadata": {
+        "simulation_step": 0,
+        "field_energy": 0.03442192052668955,
+        "tau_state": 0
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.008392895954237053,
+        "max": 0.008615958416040638,
+        "mean": 4.1119371282413203e-20,
+        "energy": 0.03442192052668955
+      }
+    },
+    {
+      "header": {
+        "block_number": 2,
+        "timestamp": 1790044360.254389,
+        "previous_hash": "08a75804deef20c034d34fb4ee973ddc016df80e3ff04df2ea59b37042aef87a",
+        "state_hash": "6d1f60c37ad967b0617757d9927057becfc6ab13720a3e9b6493f279453621d8",
+        "merkle_root": "5ffd4afa8861018c79f8266df1181cc7403d748b298a4c0d7a462bdd9f62694a",
+        "nonce": 119,
+        "pantheon_signature": "SIG_2dd38cc5a9c54c1fc91b250d",
+        "ternary_state": 0
+      },
+      "computed_hash": "d2db16644445600fe61be18641b92c044f21067e64755565e0e83be6baaa1da9",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 0.43987726482591893,
+        "Greek": 158.46418389352306
+      },
+      "metadata": {
+        "simulation_step": 5,
+        "field_energy": 1.2867343137120986,
+        "tau_state": 0
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.05149511729516395,
+        "max": 0.052736350311751404,
+        "mean": 2.9605947323337507e-19,
+        "energy": 1.2867343137120986
+      }
+    },
+    {
+      "header": {
+        "block_number": 3,
+        "timestamp": 1790044360.267497,
+        "previous_hash": "6d1f60c37ad967b0617757d9927057becfc6ab13720a3e9b6493f279453621d8",
+        "state_hash": "ec158c6b6fb5b0a199ab642120a941addfc223d9f5b4b0606a9ce879c1a3156a",
+        "merkle_root": "bcb6d96046291146c413557b63484fb5fe22fa908407cba87459cf1fe7b8fc45",
+        "nonce": 218,
+        "pantheon_signature": "SIG_1de0b70b507012686af811e6",
+        "ternary_state": 1
+      },
+      "computed_hash": "5919856b092a8f6c96e3eb513b013363bf6a793d013b274c5b029066bd85dd66",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 1.7142250722538197,
+        "Greek": 159.19913158344727
+      },
+      "metadata": {
+        "simulation_step": 10,
+        "field_energy": 4.928074325374056,
+        "tau_state": 1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.10116540920700512,
+        "max": 0.1033514592294643,
+        "mean": 5.592234494408196e-19,
+        "energy": 4.928074325374056
+      }
+    },
+    {
+      "header": {
+        "block_number": 4,
+        "timestamp": 1790044360.280663,
+        "previous_hash": "ec158c6b6fb5b0a199ab642120a941addfc223d9f5b4b0606a9ce879c1a3156a",
+        "state_hash": "5a2d1cc6826ec88843c665bf0fe970a99effb97aad1f2bb9e03d6c46d8acf6dc",
+        "merkle_root": "3f9842babd78f4cf9ee01c33c16c11a8cc77af67d0807a0226409508db3a8eba",
+        "nonce": 555,
+        "pantheon_signature": "SIG_1c90de856d433f619ebd6608",
+        "ternary_state": 1
+      },
+      "computed_hash": "e3748edd347e9048923e515b7922821389cbaf1459d94c76c122e77ac6398ab9",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 5.0802691630952275,
+        "Greek": 160.402777502707
+      },
+      "metadata": {
+        "simulation_step": 15,
+        "field_energy": 14.247370086195177,
+        "tau_state": 1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.17291133639650785,
+        "max": 0.1761251745223473,
+        "mean": 1.513192863192806e-18,
+        "energy": 14.247370086195177
+      }
+    },
+    {
+      "header": {
+        "block_number": 5,
+        "timestamp": 1790044360.2954342,
+        "previous_hash": "5a2d1cc6826ec88843c665bf0fe970a99effb97aad1f2bb9e03d6c46d8acf6dc",
+        "state_hash": "119fd5504ef1a556a0cd310589e989ed4ec56d20dd3f7258e40c989234686110",
+        "merkle_root": "1fe1d0ee4a60047ec78c72dab2f5f98aeb022b270546f396d1f2d42b2a5bbe53",
+        "nonce": 607,
+        "pantheon_signature": "SIG_dfe57d17446049cbf402602e",
+        "ternary_state": 1
+      },
+      "computed_hash": "a68715a0e8c54111b03e46c5fdd467c66492bd8acb8aeb922afc7e920e06b04c",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 10.778249552984478,
+        "Greek": 161.90473658439498
+      },
+      "metadata": {
+        "simulation_step": 20,
+        "field_energy": 29.425010441569373,
+        "tau_state": 1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.24981139247784984,
+        "max": 0.2538007313713285,
+        "mean": 0.0,
+        "energy": 29.425010441569373
+      }
+    },
+    {
+      "header": {
+        "block_number": 6,
+        "timestamp": 1790044360.3274996,
+        "previous_hash": "119fd5504ef1a556a0cd310589e989ed4ec56d20dd3f7258e40c989234686110",
+        "state_hash": "8a30091e4c9d96e91a80437a8d4e19bb6804be3eeb6cdcf29d7fcb29976208d2",
+        "merkle_root": "38962ec5b856f6863f23f826469cd5482236a0fc1c5e40870fbc6620d4c9f336",
+        "nonce": 315,
+        "pantheon_signature": "SIG_63a2efdc3ba46c2a815f6c1d",
+        "ternary_state": 1
+      },
+      "computed_hash": "1857e7b61894bcc912e27460fdf49a58a71f5b88a54d98da10abf9c29305a33e",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 19.43177551945889,
+        "Greek": 163.799121013375
+      },
+      "metadata": {
+        "simulation_step": 25,
+        "field_energy": 51.53366444331903,
+        "tau_state": 1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.3323510475843721,
+        "max": 0.3369508465970478,
+        "mean": 1.4474018691409447e-18,
+        "energy": 51.53366444331903
+      }
+    },
+    {
+      "header": {
+        "block_number": 7,
+        "timestamp": 1790044360.341129,
+        "previous_hash": "8a30091e4c9d96e91a80437a8d4e19bb6804be3eeb6cdcf29d7fcb29976208d2",
+        "state_hash": "875dfa0090a77946669d6ce7478f7136e83b5c623940695696a9a011254c6824",
+        "merkle_root": "8377ccfaad8b8d8e5160372d5698b182247569a7de40efb642bab7817a3c5a99",
+        "nonce": 87,
+        "pantheon_signature": "SIG_a970cca463ca9da30d196c27",
+        "ternary_state": 0
+      },
+      "computed_hash": "ec1db7f8c5ab9a9e14154effa37fd0952328fcbbd4a4da48da52cbb530c16751",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 30.88702262381524,
+        "Greek": 166.03484269232973
+      },
+      "metadata": {
+        "simulation_step": 30,
+        "field_energy": 79.561978761749,
+        "tau_state": 0
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.41498365172516033,
+        "max": 0.42010842617218364,
+        "mean": 1.3158198810372225e-18,
+        "energy": 79.561978761749
+      }
+    },
+    {
+      "header": {
+        "block_number": 8,
+        "timestamp": 1790044360.3541446,
+        "previous_hash": "875dfa0090a77946669d6ce7478f7136e83b5c623940695696a9a011254c6824",
+        "state_hash": "826e93f16177c5162e7b7fb11378d9ce7bbe6292f363ba777ae3ccfcfea3962c",
+        "merkle_root": "91a515961eaf171260fa047ba179960af289f7cf7fc0962603a80c0c9a21cb8a",
+        "nonce": 229,
+        "pantheon_signature": "SIG_cbab59ba67aa97f7de20fc95",
+        "ternary_state": 0
+      },
+      "computed_hash": "b299585bcfe857eae8e1b660087c43fa5c44d02af32792ba3e0a385c13225aca",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 41.56538245271298,
+        "Greek": 167.99204020236274
+      },
+      "metadata": {
+        "simulation_step": 35,
+        "field_energy": 104.70233597852338,
+        "tau_state": 0
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.47771363707963327,
+        "max": 0.4832617962580179,
+        "mean": 2.7632217501781672e-18,
+        "energy": 104.70233597852338
+      }
+    },
+    {
+      "header": {
+        "block_number": 9,
+        "timestamp": 1790044360.3677864,
+        "previous_hash": "826e93f16177c5162e7b7fb11378d9ce7bbe6292f363ba777ae3ccfcfea3962c",
+        "state_hash": "98c79f00cff92477df7d0be438bc3f5d94bb74a30f8b398ad96de5bacc80bf4d",
+        "merkle_root": "576cb59a4514086378d4a989aadb85b95ff2130a0e78d5b4b997a97f677a8691",
+        "nonce": 905,
+        "pantheon_signature": "SIG_3b6185810de3409eb68ed5e4",
+        "ternary_state": -1
+      },
+      "computed_hash": "f9d46c3760552cf709538320a6b1fd5c4d9df72e9e40b2cb2aceadbcf0aa4fb6",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 53.298942986569415,
+        "Greek": 170.06953359498937
+      },
+      "metadata": {
+        "simulation_step": 40,
+        "field_energy": 131.45946822319303,
+        "tau_state": -1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.5369298663434604,
+        "max": 0.5429487735045201,
+        "mean": 3.4211316906967788e-18,
+        "energy": 131.45946822319303
+      }
+    },
+    {
+      "header": {
+        "block_number": 10,
+        "timestamp": 1790044360.3822575,
+        "previous_hash": "98c79f00cff92477df7d0be438bc3f5d94bb74a30f8b398ad96de5bacc80bf4d",
+        "state_hash": "dbc1036c98623a859eeafca417ddd1be3fbfa1d7eba537ddcb8bcc48e9980619",
+        "merkle_root": "559a81ff8368d2d92ba271ebd9a1b9154f6c29d57b9c51947477f433810108c6",
+        "nonce": 560,
+        "pantheon_signature": "SIG_4a0abffca05dd45110ea021d",
+        "ternary_state": -1
+      },
+      "computed_hash": "c904b5142b88bf6f070797b3b5caf2b1a830172c945afa12a800f1b4cd823b21",
+      "pantheon_contributions": {
+        "Vedic": 8.166666666666659,
+        "Celtic": 54.55146293761612,
+        "Sumerian": 60.8337167875987,
+        "Greek": 171.37949516398135
+      },
+      "metadata": {
+        "simulation_step": 45,
+        "field_energy": 148.21647331602009,
+        "tau_state": -1
+      },
+      "lattice_shape": [
+        15,
+        15,
+        15
+      ],
+      "lattice_summary": {
+        "min": -0.5710885628955896,
+        "max": 0.5774290375047728,
+        "mean": 4.210623619319112e-18,
+        "energy": 148.21647331602009
+      }
+    }
+  ]
+}
