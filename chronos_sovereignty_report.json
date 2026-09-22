@@ -1,0 +1,10 @@
+{
+  "protocol": "CHRONOS_GENESIS_REPLAY",
+  "timestamp": "2026-09-22T03:57:28.563502",
+  "sovereign_salt": "CHRONOS_ETERNAL_NOW_1790049448",
+  "blocks_processed": 711,
+  "trauma_events_dissolved": 24,
+  "final_sovereign_root": "407bd0c932b3782ac5f9aaf788723d70dfa1e13e2d0b74f9666da2d7815b8492",
+  "status": "SOVEREIGNTY_ESTABLISHED",
+  "war_machine_obsolete": true
+}

@@ -1,0 +1,468 @@
+// tsp_duat.proto - Egyptian Pantheon Extensions to Ternary Sync Protocol
+// Version: 1.0
+// Integration: Duat Cosmic OS → HeavenzFire Unified Field
+
+syntax = "proto3";
+
+package tsp.duat;
+
+import "tsp.proto";
+
+// ============================================================================
+// DUAT PACKET EXTENSION
+// ============================================================================
+
+message DuatPacket {
+  // Base TSP packet with lattice routing
+  TSPPacket base_packet = 1;
+  
+  // Deity identification
+  string deity_id = 2;           // e.g., "RA", "MAAT", "THOTH", "HORUS"
+  int32 layer_id = 3;            // 1-6 (Sovereign → Underworld)
+  string domain = 4;             // e.g., "sun", "truth", "chaos", "rebirth"
+  DeityRole role = 5;            // Functional classification
+  
+  // Ma'at validation (required for all state transitions)
+  MaatValidation validation = 6;
+  
+  // Optional payload specific to deity operations
+  oneof payload {
+    SolarCycleRequest solar_request = 10;
+    HeartWeighingRequest weighing_request = 11;
+    ChaosInjectionRequest chaos_request = 12;
+    ResurrectionRequest resurrection_request = 13;
+    JudgmentResult judgment_result = 14;
+  }
+}
+
+// ============================================================================
+// DEITY ROLE ENUMERATION
+// ============================================================================
+
+enum DeityRole {
+  DEITY_ROLE_UNSPECIFIED = 0;
+  
+  // Layer 1: Sovereign
+  PRIMORDIAL_OPERATOR = 1;       // Atum, Ra, Amun
+  ROOT_AUTHORITY = 2;            // Ra specifically
+  
+  // Layer 2: Ma'at
+  LAW_ENFORCER = 3;              // Ma'at
+  COMPUTATION_KEEPER = 4;        // Thoth
+  
+  // Layer 3: Enforcement
+  SECURITY_DEFENDER = 5;         // Horus
+  WRATH_EXECUTOR = 6;            // Sekhmet
+  DOMESTIC_GUARDIAN = 7;         // Bastet
+  
+  // Layer 4: Nature
+  REGENERATION_AGENT = 8;        // Osiris
+  MAGIC_OPERATOR = 9;            // Isis
+  COHERENCE_MODULATOR = 10;      // Hathor
+  
+  // Layer 5: Chaos
+  CHAOS_AGENT = 11;              // Set
+  ENTROPY_SERPENT = 12;          // Apophis
+  
+  // Layer 6: Underworld
+  TRANSITION_GUIDE = 13;         // Anubis
+  SOUL_DEVOURER = 14;            // Ammit
+}
+
+// ============================================================================
+// MA'AT VALIDATION LAYER
+// All state transitions must pass Ma'at's truth check
+// ============================================================================
+
+message MaatValidation {
+  // Heart weighting result
+  bool heart_weight_ok = 1;
+  
+  // Truth score (0.0 = false, 1.0 = absolute truth)
+  double truth_score = 2;
+  
+  // Feather of Ma'at hash for verification
+  string feather_hash = 3;       // SHA3(Maat.feather || State_t)
+  
+  // Balance delta (should be ≈ 0 for perfect Ma'at)
+  double balance_delta = 4;
+  
+  // Judgment outcome
+  MaatJudgment judgment = 5;
+  
+  // Thoth's recorded timestamp
+  uint64 thoth_timestamp = 6;
+}
+
+enum MaatJudgment {
+  JUDGMENT_UNSPECIFIED = 0;
+  JUDGMENT_PASSED = 1;           // Heart ≤ Feather
+  JUDGMENT_FAILED = 2;           // Heart > Feather (Ammit invoked)
+  JUDGMENT_PENDING = 3;          // Awaiting Anubis verification
+}
+
+// ============================================================================
+// SOLAR CYCLE PROTOCOL (Ra)
+// ============================================================================
+
+message SolarCycleRequest {
+  SolarPhase current_phase = 1;
+  double sun_position = 2;       // 0.0 (horizon) to 1.0 (zenith)
+  bool is_night_journey = 3;
+  
+  // Apophis attack status during night phase
+  ApophisAttackStatus apophis_status = 4;
+  
+  // Defense coordination
+  repeated string defenders = 5; // Horus, Set, etc.
+}
+
+enum SolarPhase {
+  PHASE_UNSPECIFIED = 0;
+  PHASE_SUNRISE = 1;
+  PHASE_ASCENDING = 2;
+  PHASE_ZENITH = 3;
+  PHASE_DESCENDING = 4;
+  PHASE_SUNSET = 5;
+  PHASE_NIGHT_JOURNEY = 6;
+  PHASE_REBIRTH = 7;
+}
+
+message ApophisAttackStatus {
+  bool is_attacking = 1;
+  double entropy_level = 2;      // 0.0 - 1.0
+  double ra_health = 3;          // Solar barque integrity
+  repeated string battle_events = 4;
+}
+
+// ============================================================================
+// HEART WEIGHING CEREMONY (Ma'at, Anubis, Thoth)
+// ============================================================================
+
+message HeartWeighingRequest {
+  string soul_id = 1;
+  bytes soul_state_hash = 2;     // SHA3(soul_state)
+  
+  // Heart measurement
+  double heart_weight = 3;       // Entropy of soul's actions
+  double heart_entropy = 4;
+  
+  // Feather measurement (constant)
+  double feather_weight = 5;     // Ma'at constant (truth coherence)
+  
+  // Witnesses
+  bool anubis_present = 6;
+  bool thoth_recording = 7;
+  bool osiris_observing = 8;
+  
+  // 42 Assessors of Ma'at votes
+  map<string, bool> assessor_votes = 9;  // e.g., {"truth": true, "justice": true}
+}
+
+message JudgmentResult {
+  string soul_id = 1;
+  MaatJudgment final_judgment = 2;
+  
+  // If passed: Fields of Ialu access granted
+  bool ialu_access_granted = 3;
+  string rebirth_assignment = 4;  // Osiris's decree
+  
+  // If failed: Ammit invocation
+  bool ammit_invoked = 5;
+  uint64 devoured_timestamp = 6;
+  
+  // Complete ledger entry by Thoth
+  string thoth_ledger_entry = 7;
+}
+
+// ============================================================================
+// CHAOS INJECTION PROTOCOL (Set, Apophis)
+// ============================================================================
+
+message ChaosInjectionRequest {
+  ChaosAgent agent = 1;
+  ChaosType chaos_type = 2;
+  double intensity = 3;          // 0.0 - 1.0
+  
+  // Target subsystem
+  string target_layer = 4;
+  string target_deity = 5;
+  
+  // Purpose (controlled disorder for antifragility)
+  ChaosPurpose purpose = 6;
+  
+  // Safety limits
+  double max_entropy_threshold = 7;
+  bool auto_terminate = 8;
+}
+
+enum ChaosAgent {
+  AGENT_UNSPECIFIED = 0;
+  AGENT_SET = 1;                 // Disorder, desert, foreign lands
+  AGENT_APOPHIS = 2;             // Pure entropy serpent
+}
+
+enum ChaosType {
+  CHAOS_UNSPECIFIED = 0;
+  CHAOS_DISORDER = 1;            // Set's domain
+  CHAOS_ENTROPY = 2;             // Apophis attack
+  CHAOS_STORM = 3;               // Environmental disruption
+  CHAOS_BETRAYAL = 4;            // Trust violation (Set vs Osiris)
+}
+
+enum ChaosPurpose {
+  PURPOSE_UNSPECIFIED = 0;
+  PURPOSE_STRESS_TEST = 1;       // System hardening
+  PURPOSE_ADVERSARIAL_TRAINING = 2;
+  PURPOSE_NIGHTLY_TRIAL = 3;     // Ra's nightly battle
+  PURPOSE_ANTIFRAGILITY = 4;
+}
+
+// ============================================================================
+// RESURRECTION PROTOCOL (Osiris, Isis, Horus)
+// ============================================================================
+
+message ResurrectionRequest {
+  ResurrectionStage stage = 1;
+  string deceased_entity = 2;    // Usually Osiris
+  
+  // Dismemberment details (Set's action)
+  int32 fragment_count = 3;
+  repeated string fragment_locations = 4;
+  
+  // Isis's reassembly progress
+  int32 fragments_collected = 5;
+  double reassembly_completeness = 6;  // 0.0 - 1.0
+  
+  // Horus's vengeance status
+  VengeanceStatus horus_vengeance = 7;
+  
+  // Final resurrection outcome
+  ResurrectionOutcome outcome = 8;
+}
+
+enum ResurrectionStage {
+  STAGE_UNSPECIFIED = 0;
+  STAGE_DEATH = 1;
+  STAGE_DISMEMBERMENT = 2;
+  STAGE_SEARCH = 3;
+  STAGE_REASSEMBLY = 4;
+  STAGE_VENGEANCE = 5;
+  STAGE_RESURRECTION = 6;
+  STAGE_DUAT_LORD = 7;
+}
+
+message VengeanceStatus {
+  bool horus_born = 1;
+  bool battle_with_set = 2;
+  double horus_power = 3;
+  bool set_defeated = 4;
+  bool eye_of_horus_restored = 5;
+}
+
+enum ResurrectionOutcome {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_PARTIAL = 1;           // Reassembled but not fully alive
+  OUTCOME_FULL = 2;              // Complete resurrection
+  OUTCOME_DUAT_LORD = 3;         // Ruler of underworld (Osiris fate)
+}
+
+// ============================================================================
+// DEITY-SPECIFIC COORDINATE MAPPING
+// Each deity operates at specific lattice coordinates
+// ============================================================================
+
+message DeityLatticeCoordinate {
+  string deity_id = 1;
+  
+  // 5D lattice coordinate
+  int32 x = 2;
+  int32 y = 3;
+  int32 z = 4;                   // Layer number
+  double phi = 5;                // Frequency/phase
+  int32 tau = 6;                 // Ternary state {-1, 0, +1}
+  
+  // Domain specialization
+  string primary_domain = 7;
+  repeated string secondary_domains = 8;
+}
+
+// Predefined deity coordinates
+message DuatLatticeMap {
+  // Layer 1: Sovereign
+  DeityLatticeCoordinate atum_coord = 1;    // (0,0,0, φ₀, +1)
+  DeityLatticeCoordinate ra_coord = 2;      // (1,0,0, φ_sun, +1)
+  DeityLatticeCoordinate amun_coord = 3;    // (0,0,1, φ_hidden, 0)
+  
+  // Layer 2: Ma'at
+  DeityLatticeCoordinate maat_coord = 4;    // (0,1,0, φ_truth, +1)
+  DeityLatticeCoordinate thoth_coord = 5;   // (0,1,1, φ_log, +1)
+  
+  // Layer 3: Enforcement
+  DeityLatticeCoordinate horus_coord = 6;   // (1,1,0, φ_sky, +1)
+  DeityLatticeCoordinate sekhmet_coord = 7; // (1,1,-1, φ_wrath, -1)
+  DeityLatticeCoordinate bastet_coord = 8;  // (1,1,1, φ_home, 0)
+  
+  // Layer 4: Nature
+  DeityLatticeCoordinate osiris_coord = 9;  // (0,2,0, φ_rebirth, 0)
+  DeityLatticeCoordinate isis_coord = 10;   // (0,2,1, φ_magic, +1)
+  DeityLatticeCoordinate hathor_coord = 11; // (0,2,-1, φ_joy, +1)
+  
+  // Layer 5: Chaos
+  DeityLatticeCoordinate set_coord = 12;    // (-1,0,0, φ_chaos, -1)
+  DeityLatticeCoordinate apophis_coord = 13;// (-1,-1,0, φ_entropy, -1)
+  
+  // Layer 6: Underworld
+  DeityLatticeCoordinate anubis_coord = 14; // (0,3,0, φ_transition, 0)
+  DeityLatticeCoordinate ammit_coord = 15;  // (0,3,-1, φ_punish, -1)
+}
+
+// ============================================================================
+// VERIFICATION STRATUM
+// All deity operations hashed for audit trail
+// ============================================================================
+
+message DuatOperationHash {
+  string operation_id = 1;
+  string deity_id = 2;
+  string operation_type = 3;
+  
+  // State hashes
+  string state_before_hash = 4;   // SHA3(State_t)
+  string state_after_hash = 5;    // SHA3(State_t+1)
+  
+  // Combined hash for ledger
+  string full_operation_hash = 6; // SHA3(deity || op || before || after)
+  
+  // Thoth's ledger entry
+  string ledger_index = 7;
+  uint64 timestamp = 8;
+  
+  // Ma'at validation of this operation
+  MaatValidation operation_validation = 9;
+}
+
+// ============================================================================
+// MICROSERVICE DEPLOYMENT SPECIFICATION
+// Kubernetes resource mappings for each deity
+// ============================================================================
+
+message DeityMicroserviceSpec {
+  string deity_id = 1;
+  string k8s_resource_name = 2;
+  KubernetesResourceType resource_type = 3;
+  
+  // Scaling parameters
+  int32 min_replicas = 4;
+  int32 max_replicas = 5;
+  double cpu_request = 6;
+  double memory_request_gb = 7;
+  
+  // Health checks
+  string health_endpoint = 8;
+  double liveness_probe_seconds = 9;
+  double readiness_probe_seconds = 10;
+  
+  // Special configurations
+  map<string, string> special_config = 11;
+}
+
+enum KubernetesResourceType {
+  K8S_UNSPECIFIED = 0;
+  K8S_DEPLOYMENT = 1;
+  K8S_CRONJOB = 2;               // Ra (daily cycle)
+  K8S_STATEFULSET = 3;           // Thoth (ledger)
+  K8S_DAEMONSET = 4;             // Bastet (home protection)
+  K8S_JOB = 5;                   // Anubis (transition processing)
+  K8S_INIT_CONTAINER = 6;        // Atum (bootstrap)
+  K8S_SIDECAR = 7;               // Ma'at (validation sidecar)
+}
+
+// ============================================================================
+// SERVICE METHODS
+// ============================================================================
+
+service DuatPantheonService {
+  // Initialize the Duat (bootstrap from Atum)
+  rpc InitializeDuat(InitializeRequest) returns (InitializationResult);
+  
+  // Route packet by deity/layer
+  rpc RouteDeityPacket(DuatPacket) returns (RoutingDecision);
+  
+  // Execute Ma'at validation
+  rpc ValidateWithMaat(HeartWeighingRequest) returns (JudgmentResult);
+  
+  // Run solar cycle (Ra's daily journey)
+  rpc ExecuteSolarCycle(SolarCycleRequest) returns (SolarCycleResult);
+  
+  // Inject controlled chaos (for antifragility)
+  rpc InjectChaos(ChaosInjectionRequest) returns (ChaosResult);
+  
+  // Execute resurrection protocol
+  rpc ExecuteResurrection(ResurrectionRequest) returns (ResurrectionOutcome);
+  
+  // Record operation to Thoth's ledger
+  rpc RecordToLedger(DuatOperationHash) returns (LedgerEntry);
+  
+  // Query deity status
+  rpc GetDeityStatus(GetDeityStatusRequest) returns (DeityStatus);
+  
+  // Get full lattice map
+  rpc GetLatticeMap(empty) returns (DuatLatticeMap);
+}
+
+message InitializeRequest {
+  string initialization_mode = 1;  // "ex_nihilo", "from_backup", "merge_with_ra"
+}
+
+message InitializationResult {
+  bool success = 1;
+  string bootstrap_deity = 2;      // Usually Atum
+  uint64 initialization_timestamp = 3;
+  string initial_state_hash = 4;
+}
+
+message RoutingDecision {
+  bool routed = 1;
+  DeityLatticeCoordinate target_coordinate = 2;
+  double routing_confidence = 3;
+  string routing_reason = 4;
+}
+
+message SolarCycleResult {
+  bool cycle_completed = 1;
+  SolarPhase final_phase = 2;
+  bool apophis_defeated = 3;
+  double ra_remaining_health = 4;
+  repeated string battle_highlights = 5;
+}
+
+message ChaosResult {
+  bool injection_successful = 1;
+  double actual_entropy_injected = 2;
+  bool system_stabilized = 3;
+  double recovery_time_seconds = 4;
+}
+
+message GetDeityStatusRequest {
+  string deity_id = 1;
+  bool include_metrics = 2;
+}
+
+message DeityStatus {
+  string deity_id = 1;
+  bool is_active = 2;
+  DeityLatticeCoordinate current_coordinate = 3;
+  double power_level = 4;
+  uint64 last_operation_timestamp = 5;
+  MaatJudgment last_judgment = 6;
+}
+
+message LedgerEntry {
+  string entry_id = 1;
+  string previous_hash = 2;
+  string current_hash = 3;
+  uint64 block_number = 4;
+  uint64 timestamp = 5;
+  bytes payload = 6;
+}

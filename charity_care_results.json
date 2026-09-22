@@ -1,0 +1,68 @@
+[
+  {
+    "patient_profile": {
+      "household_size": 4,
+      "income": 45000
+    },
+    "assessment": {
+      "tier": "Tier_1_Full_Charity",
+      "fpl_percent": 144.23,
+      "discount_percent": 100,
+      "moop_cap": 0,
+      "eligible": true
+    },
+    "financial_outcome": {
+      "original_bill": 50000,
+      "discount_applied": "100%",
+      "pre_cap_amount": 0.0,
+      "moop_cap_enforced": 0,
+      "final_patient_liability": 0.0,
+      "total_savings": 50000.0
+    },
+    "status": "SOVEREIGN_PROTECTED"
+  },
+  {
+    "patient_profile": {
+      "household_size": 2,
+      "income": 14000
+    },
+    "assessment": {
+      "tier": "Tier_1_Full_Charity",
+      "fpl_percent": 68.49,
+      "discount_percent": 100,
+      "moop_cap": 0,
+      "eligible": true
+    },
+    "financial_outcome": {
+      "original_bill": 25000,
+      "discount_applied": "100%",
+      "pre_cap_amount": 0.0,
+      "moop_cap_enforced": 0,
+      "final_patient_liability": 0.0,
+      "total_savings": 25000.0
+    },
+    "status": "SOVEREIGN_PROTECTED"
+  },
+  {
+    "patient_profile": {
+      "household_size": 3,
+      "income": 90000
+    },
+    "assessment": {
+      "tier": "Tier_3_Sliding_Scale",
+      "fpl_percent": 348.57,
+      "discount_percent": 50,
+      "moop_cap": 2500,
+      "eligible": true
+    },
+    "financial_outcome": {
+      "original_bill": 100000,
+      "discount_applied": "50%",
+      "pre_cap_amount": 50000.0,
+      "moop_cap_enforced": 2500,
+      "final_patient_liability": 2500,
+      "total_savings": 97500
+    },
+    "status": "SOVEREIGN_PROTECTED"
+  }
+]
